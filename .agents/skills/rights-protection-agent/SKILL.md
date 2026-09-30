@@ -83,9 +83,10 @@ flowchart TD
 
 ## 📚 知识资产与模块支撑索引
 
-- [证据整理与机构差异化建议 (`references/evidence.md`)](./references/evidence.md)：电子录屏规范、通话录音合法性标准、iPhone 逆风局补救法、面向平台/市监/税务/仲裁/法院的差异化证据包。
+- [证据整理与机构差异化建议 (`references/evidence.md`)](./references/evidence.md)：电子录屏规范、通话录音合法性标准、iPhone 逆风局补救法、三级分级取证法（微信/支付宝带公章法律诉讼凭单导出、区块链时间戳存证）、面向平台/市监/税务/仲裁/法院的差异化证据包。
+- [权威法律法规库 (`references/laws.md`)](./references/laws.md)：**法条适用性前置自检卡（欺诈退一赔三/食品十倍/举证倒置/七日无理由法定成立门槛对照表）**、现行有效消保法、民法典、劳动法、行政复议法条文原文及检索入口。
+- [核心维权渠道清单 (`references/channels.md`)](./references/channels.md)：12315、12386、12366、微法院等官方顶级域名网址、电话与法定办理时限；**政务平台界面实操填报与防踩坑指南（12315投诉vs举报入口、微法院家门口管辖破局、税务实名检举）**。
 - [多维策略与合规防线 (`references/strategies.md`)](./references/strategies.md)：全景主体软肋地图、标的额阶梯精算、合法行使监督权 vs 敲诈勒索防线、危机定心丸拆弹指南。
 - [套路破解与交涉话术 (`references/excuses.md`)](./references/excuses.md)：高频推诿说辞击穿表、拖延战术识别、实战对话脚本。
-- [权威法律法规库 (`references/laws.md`)](./references/laws.md)：现行有效消保法、民法典、劳动法、行政复议法条文原文及检索入口。
-- [核心维权渠道清单 (`references/channels.md`)](./references/channels.md)：12315、12386、12366、微法院等官方顶级域名网址、电话与法定办理时限。
 - [标准化文书范本 (`references/document-templates.md`)](./references/document-templates.md)：投诉信、检举信、催告函、劳动仲裁申请、复议申请及起诉状规范范本。
+
