@@ -1,17 +1,34 @@
 <div align="center">
 
-# ⚖️ Rights Protection Agent
+<img src="./assets/banner.svg" alt="Rights Protection Agent Banner" width="100%" />
 
-**Equipping Every Ordinary Citizen with a "God-View" Digital Legal & Dispute Strategy Brain**
+<br/><br/>
 
 [![GitHub Stars](https://img.shields.io/github/stars/JimmyWangJimmy/rights-protection-agent?style=for-the-badge&logo=github&color=gold)](https://github.com/JimmyWangJimmy/rights-protection-agent/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.badge?style=for-the-badge)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.badge?style=for-the-badge)](./CONTRIBUTING.md)
-[![Agentic Skill](https://img.shields.io/badge/Architecture-Agentic%20Skill-orange.badge?style=for-the-badge)](#-architecture--philosophy)
+[![Web Workbench](https://img.shields.io/badge/Web%20UI-Interactive%20Workbench-06B6D4?style=for-the-badge)](#-interactive-web-ui-workbench)
+[![Discussions](https://img.shields.io/badge/Discussions-Open-purple.badge?style=for-the-badge)](https://github.com/JimmyWangJimmy/rights-protection-agent/discussions)
 
-English | [简体中文](./README.md) | [Quickstart](#-one-line-quickstart) | [Contribution](./CONTRIBUTING.md)
+**English** | **[简体中文](./README.md)** | **[🎮 Web Sandbox](#-interactive-web-ui-workbench)** | **[🚀 Quickstart](#-one-line-quickstart)** | **[🏆 Hall of Fame](#-battle-tested-case-hall-of-fame)** | **[🤝 Contribution](./CONTRIBUTING.md)**
 
 </div>
+
+---
+
+## 🎮 Interactive Web UI Workbench
+
+Prefer a visual, point-and-click interface over raw markdown? The repository includes a zero-dependency **Interactive Web UI Workbench (`index.html`)**:
+
+<div align="center">
+  <kbd>Double-click <b>index.html</b> in the repo root to run directly in any web browser (no backend required).</kbd>
+</div>
+
+- 🎯 **Intake & God-View Diagnosis**: Select dispute scenarios to calculate winning probabilities, find statutory breaking points, and get cold rebuttal lines;
+- 🎭 **Live Multi-LLM Debate Simulator**: Pre-test cases against corporate counsel objections and judicial arbiters;
+- 🛡️ **Evidence Defense Ladder**: Interactive checklist with live credibility score calculation;
+- 📝 **Formal Legal Document Workbench**: 1-click generators for regulatory complaints, tax whistleblowing, and small claims lawsuits;
+- 🏆 **Victory Hall of Fame Gallery**: Interactive case cards showing battle-tested turn-around stories.
 
 ---
 

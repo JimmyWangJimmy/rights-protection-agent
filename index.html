@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>维权代理人 (Rights Protection Agent) - 数字维权沙盘工作台</title>
+  <!-- Tailwind CSS -->
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', Consolas, monospace; }
+    .glass { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(51, 65, 85, 0.6); }
+    .glass-card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.8); }
+    .glow-blue { box-shadow: 0 0 25px -5px rgba(59, 130, 246, 0.3); }
+    .glow-purple { box-shadow: 0 0 25px -5px rgba(168, 85, 247, 0.3); }
+  </style>
+</head>
+<body class="bg-[#090D16] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Top Navbar -->
+  <header class="sticky top-0 z-50 glass border-b border-slate-800/80 px-6 py-3.5 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/25">
+        <span class="text-xl">⚖️</span>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-lg tracking-wide text-white">维权代理人</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30 font-medium">v2.0 Beta</span>
+        </div>
+        <p class="text-xs text-slate-400">Rights Protection Agent · 普通人的数字维权参谋长</p>
+      </div>
+    </div>
+
+    <!-- Nav Tabs -->
+    <nav class="hidden md:flex items-center space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+      <button onclick="switchTab('intake')" id="tab-intake" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all bg-blue-600 text-white shadow-sm">
+        🎯 案情速诊
+      </button>
+      <button onclick="switchTab('debate')" id="tab-debate" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        🎭 红蓝对抗推演
+      </button>
+      <button onclick="switchTab('evidence')" id="tab-evidence" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        🛡️ 证据链排查
+      </button>
+      <button onclick="switchTab('draft')" id="tab-draft" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        📝 规范文书代写
+      </button>
+      <button onclick="switchTab('hall')" id="tab-hall" class="tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white">
+        🏆 胜利名人堂
+      </button>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="flex items-center space-x-3">
+      <a href="https://github.com/JimmyWangJimmy/rights-protection-agent" target="_blank" class="flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub 🌟</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
+
+    <!-- Hero Banner Alert -->
+    <div class="relative overflow-hidden rounded-2xl p-6 glass border-slate-700/60 glow-blue">
+      <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="inline-flex items-center space-x-2 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <span>🛡️ 拒绝弱势被套路</span>
+            <span>·</span>
+            <span>非对称策略博弈大脑</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            别在商家的主场生闷气，用<span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">上帝视角</span>重新执棋
+          </h1>
+          <p class="text-sm text-slate-400 max-w-2xl">
+            提供真实有效法条（国家法律法规数据库核验）、逆风取证指南、多 LLM 红蓝对抗推演、规范公文代写与和解交割安全闭环。
+          </p>
+        </div>
+        <div class="flex items-center space-x-3 shrink-0">
+          <button onclick="loadSampleCase('digital')" class="px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-xs font-semibold text-white shadow-md shadow-blue-500/20 transition">
+            ⚡ 加载数码退货典型案
+          </button>
+          <button onclick="loadSampleCase('labor')" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-slate-200 transition">
+            👔 加载违法辞退典型案
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: 🎯 案情极简问诊 (Intake & Diagnosis) -->
+    <section id="section-intake" class="tab-content space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Intake Inputs -->
+        <div class="lg:col-span-5 glass-card rounded-2xl p-6 space-y-5">
+          <h2 class="text-lg font-bold text-white flex items-center space-x-2">
+            <span>🎯 极简案情问诊 (Step-by-Step Intake)</span>
+          </h2>
+          <p class="text-xs text-slate-400">拒绝查户口式长盘问。仅需 3 个核心要素，参谋长立即为你拆解破局支点。</p>
+
+          <div class="space-y-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">1. 纠纷大类场景</label>
+              <select id="case-category" onchange="updateIntakeTemplate()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+                <option value="digital">消费纠纷 · 数码网购已拆封拒绝退款 (退货退款)</option>
+                <option value="fraud">消费欺诈 · 直播间假冒伪劣/成分虚标 (退一赔三)</option>
+                <option value="labor">劳动人事 · 中小企业未签合同/违法辞退 (2N赔偿)</option>
+                <option value="rent">房屋租赁 · 二房东中介巧立名目克扣押金 (全额退押)</option>
+                <option value="prepaid">预付消费 · 健身房/早教闭店跑路 (支付令追缴)</option>
+                <option value="crossborder">跨国数字 · Steam封号 / 海外SaaS乱扣费 (信用卡拒付)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">2. 涉事主体（对方具体是谁？）</label>
+              <input id="case-opponent" type="text" value="某天猫第三方旗舰店 (企业工商全称待查)" placeholder="例如：某电商第三方小店、XX科技有限责任公司、二房东中介" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">涉及金额 (元/美元)</label>
+                <input id="case-amount" type="number" value="4299" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1.5">发生时间</label>
+                <input id="case-time" type="text" value="收货后第 2 天" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1.5">3. 对方目前卡在哪一句话上？(关键推诿借口)</label>
+              <textarea id="case-pushback" rows="3" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-blue-500" placeholder="对方客服/HR的原话借口...">“已拆封激活联网，影响二次销售，不属于七天无理由退货。请自行去官方售后自费开检测单。”</textarea>
+            </div>
+
+            <button onclick="runDiagnosis()" class="w-full py-2.5 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-sm font-bold text-white shadow-lg shadow-blue-500/25 transition flex items-center justify-center space-x-2">
+              <span>🚀 立即生成破局策略与非对称杠杆</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Diagnostic Output -->
+        <div class="lg:col-span-7 space-y-5">
+          <div class="glass-card rounded-2xl p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div class="flex items-center space-x-2">
+                <span class="text-lg">🧭</span>
+                <h3 class="font-bold text-white">参谋长策略研判报告 (God-View Analysis)</h3>
+              </div>
+              <span id="badge-statute" class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold">
+                胜率评估: 85%
+              </span>
+            </div>
+
+            <!-- Output: Non-symmetric Leverage -->
+            <div class="space-y-4 text-sm">
+              <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-800/50 space-y-1.5">
+                <div class="flex items-center text-xs font-bold text-blue-400 uppercase tracking-wider space-x-1.5">
+                  <span>⚡ 核心破局法理（直击死穴）</span>
+                </div>
+                <p id="out-legal" class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                  对方主张“拆封不退”偷换了法律概念！本案属于《消保法》第24条<strong>法定质量瑕疵退货</strong>，绝非第25条“无理由退货”。根据《消保法》第23条第3款，手机属于耐用数码商品，六个月内出现瑕疵，<strong>由经营者承担举证责任</strong>，依法严禁要求消费者自费送检！
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800/50 space-y-1.5">
+                <div class="flex items-center text-xs font-bold text-purple-400 uppercase tracking-wider space-x-1.5">
+                  <span>🎯 降维施压杠杆（非对称传导）</span>
+                </div>
+                <p id="out-leverage" class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                  不与外包客服纠缠。直接向其企业工商登记地管辖的<strong>区市场监督管理局 (12315)</strong> 提交投诉书。直击《消保法》第26条格式条款无效及侵害消费者合法权益，迫使其售后总监为了防止被市监所现场抽检进货台账而主动求和解。
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 space-y-1.5">
+                <div class="flex items-center text-xs font-bold text-amber-400 uppercase tracking-wider space-x-1.5">
+                  <span>💬 今日唯一必做行动（Focus on Next 1 Step）</span>
+                </div>
+                <p id="out-action" class="text-slate-200 text-xs sm:text-sm leading-relaxed">
+                  第一步：在微信账单中点击该笔支付，选择【申请电子凭证】导出带有财付通鲜红公章的官方 PDF（耗时 2 分钟）；<br>
+                  第二步：复制下方话术，在平台对话框中一次性发送给商家客服后，<strong>立即停止口舌之争</strong>，等待其升级响应。
+                </p>
+              </div>
+
+              <!-- Rebuttal Script Box -->
+              <div class="bg-slate-900 rounded-xl p-4 border border-slate-800 space-y-2">
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                  <span class="font-semibold text-slate-300">冷酷反制话术（复制发送）</span>
+                  <button onclick="copyToClipboard('rebuttal-script')" class="text-blue-400 hover:text-blue-300 font-medium">一键复制</button>
+                </div>
+                <div id="rebuttal-script" class="mono text-xs text-blue-200/90 leading-relaxed bg-black/40 p-3 rounded-lg border border-slate-800 select-all">
+“请明确：本次主张基于《消保法》第二十四条质量瑕疵法定退货，非七日无理由退货。根据《消保法》第二十三条第三款，手机属于耐用品，六个月内发生争议由贵司承担无瑕疵举证责任。贵司要求消费者自费鉴定的格式条款自始无效。如今日18:00前未开通退款通道，我方将向属地市场监督管理所（12315）提交完整开箱证据并申请现场台账核查。”
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-end space-x-3 pt-2">
+              <button onclick="switchTab('debate')" class="px-4 py-2 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 border border-indigo-500/40 text-xs font-semibold text-indigo-200 transition flex items-center space-x-1">
+                <span>🎭 担心对方反扑？进入红蓝对抗推演</span>
+                <span>→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: 🎭 多 LLM 红蓝对抗推演演练室 (Live Debate Simulator) -->
+    <section id="section-debate" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <span>🎭 多 LLM 红蓝对抗推演演练室 (Multi-LLM Debate Simulator)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">
+              模拟老油条企业法务刁难挑刺，提前测算审判法官心证，找出第一证据死穴与和解底线。
+            </p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="simulateDebate('digital')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-xs font-medium text-white hover:bg-blue-500 transition">演练：数码纠纷</button>
+            <button onclick="simulateDebate('labor')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-xs font-medium text-white hover:bg-purple-500 transition">演练：劳动辞退</button>
+            <button onclick="simulateDebate('rent')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-xs font-medium text-white hover:bg-emerald-500 transition">演练：租房扣押金</button>
+          </div>
+        </div>
+
+        <!-- 3 Role Arena -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Blue: Claimant Advocate -->
+          <div class="rounded-xl border border-blue-800/60 bg-blue-950/20 p-5 space-y-3 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">🟦 蓝方：维权参谋长</span>
+              <span class="text-xs text-blue-300/80">攻方策略</span>
+            </div>
+            <h4 class="font-bold text-white text-sm" id="debate-blue-title">主张法定质量瑕疵退货与欺诈惩罚</h4>
+            <div class="text-xs text-slate-300 space-y-2 leading-relaxed" id="debate-blue-content">
+              • 依据《消保法》第24条法定退货，击碎对方“拆封不退”借口；<br>
+              • 依据《消保法》第23条第3款，主张六个月内举证责任倒置；<br>
+              • 保留向12315申请现场台账调取的非对称行政杠杆。
+            </div>
+          </div>
+
+          <!-- Red: Corporate Counsel Devil's Advocate -->
+          <div class="rounded-xl border border-rose-800/60 bg-rose-950/20 p-5 space-y-3 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30">🟥 红方：老油条企业法务</span>
+              <span class="text-xs text-rose-300/80">守方反扑</span>
+            </div>
+            <h4 class="font-bold text-white text-sm" id="debate-red-title">挑刺证据真实性与心理恐吓</h4>
+            <div class="text-xs text-slate-300 space-y-2 leading-relaxed" id="debate-red-content">
+              • “买方提供的微距拍照未在公证处见证下完成，无法排除后期人为划痕”；<br>
+              • “用户协议已约定纠纷由公司所在地仲裁委管辖，法院无管辖权”；<br>
+              • “索赔金额若超出货款，涉嫌以维权为名敲诈勒索，法务将向经侦报案”。
+            </div>
+          </div>
+
+          <!-- Judge: Neutral Arbiter -->
+          <div class="rounded-xl border border-amber-800/60 bg-amber-950/20 p-5 space-y-3 relative overflow-hidden">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">⚖️ 中立审判席：法官实务心证</span>
+              <span class="text-xs text-amber-300/80">裁量结论</span>
+            </div>
+            <h4 class="font-bold text-white text-sm" id="debate-judge-title">法庭采信胜率：约 75%</h4>
+            <div class="text-xs text-slate-300 space-y-2 leading-relaxed" id="debate-judge-content">
+              • <strong>蓝方致命死穴</strong>：未开具官方顺丰保价与快递员当面验视揽收记录，容易被红方反咬退回虚假物品；<br>
+              • <strong>红方最大弱点</strong>：格式管辖条款明显加重消费者负担自始无效；<br>
+              • <strong>和解建议</strong>：坚持全额退款 + 商家承担退回运费，不建议耗费半年打民事诉讼。
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Cross-LLM Prompt Box -->
+        <div class="bg-slate-900/90 rounded-xl p-4 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-300">💡 想在 ChatGPT / Claude / DeepSeek 之间进行跨模型对轰？</span>
+            <button onclick="copyToClipboard('cross-prompt')" class="px-2.5 py-1 rounded bg-blue-600/30 text-blue-400 hover:bg-blue-600/50 text-xs font-semibold transition">复制对抗 Prompt</button>
+          </div>
+          <p class="text-xs text-slate-400">将下方 Prompt 喂给任意大模型，让它化身顶级刺头企业法务对你的案情进行极限施压：</p>
+          <pre id="cross-prompt" class="mono text-xs text-slate-300 bg-black/50 p-3 rounded-lg overflow-x-auto border border-slate-800/80">
+你是一家百亿市值互联网企业的资深法务总监兼危机公关专家。你的目标是：
+1. 用最刁钻的诉讼程序、管辖权异议（如约定仲裁）与证据瑕疵阻击消费者的索赔；
+2. 抓住对方证据链的断裂点进行猛烈反驳；
+3. 用冷酷、专业的法言法语回应对方陈述，并暗示高额索赔可能构成涉嫌侵害商誉或敲诈勒索；
+4. 绝不主动认错。请阅读案情并列出你最具杀伤力的 3 条抗辩反扑策略。
+案情描述：[粘贴你的案情]
+          </pre>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: 🛡️ 证据链排查 (Evidence Ladder Checklist) -->
+    <section id="section-evidence" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <span>🛡️ 司法级证据防御力自检清单 (Evidence Ladder)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">根据《民事诉讼法》证据三性（真实性、合法性、关联性）规则，构建击不倒的闭环防御阵地。</p>
+          </div>
+          <div class="text-right">
+            <div class="text-xs text-slate-400">证据防御力指数</div>
+            <div id="evidence-score" class="text-2xl font-extrabold text-blue-400">60%</div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Item 1 -->
+          <label class="flex items-start space-x-3 p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/70 cursor-pointer transition">
+            <input type="checkbox" checked onchange="calcEvidence()" class="evidence-chk mt-1 w-4 h-4 rounded text-blue-600 bg-slate-900 border-slate-700 focus:ring-0">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-semibold text-white">支付凭单导出（带腾讯/阿里官方公章）</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">必做 ★★★</span>
+              </div>
+              <p class="text-xs text-slate-400">在微信【账单】->【常见问题】->【下载账单】中选择“用作证明材料”，可导出加盖财付通鲜红公章的官方 PDF 电子凭证，法院与仲裁委免予真实性举证质证。</p>
+            </div>
+          </label>
+
+          <!-- Item 2 -->
+          <label class="flex items-start space-x-3 p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/70 cursor-pointer transition">
+            <input type="checkbox" checked onchange="calcEvidence()" class="evidence-chk mt-1 w-4 h-4 rounded text-blue-600 bg-slate-900 border-slate-700 focus:ring-0">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-semibold text-white">一镜到底开箱 / 故障录屏存证</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">核心 ★★☆</span>
+              </div>
+              <p class="text-xs text-slate-400">录屏开始时必须从手机下拉控制中心展示当前北京时间与日期，展示包裹六面完整面单（含快递单号），中途无任何画面剪切与拼接。</p>
+            </div>
+          </label>
+
+          <!-- Item 3 -->
+          <label class="flex items-start space-x-3 p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/70 cursor-pointer transition">
+            <input type="checkbox" onchange="calcEvidence()" class="evidence-chk mt-1 w-4 h-4 rounded text-blue-600 bg-slate-900 border-slate-700 focus:ring-0">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-semibold text-white">逆风局通话录音合规（最高法证据规定第95条）</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 border border-purple-500/30">逆风防线 ★★☆</span>
+              </div>
+              <p class="text-xs text-slate-400">针对 iPhone 无法内录：使用双机外放录制。录音首句必须明确对方主体：“您好，我是买家张三，您是XX旗舰店负责售后的李经理对吧？针对我订单尾号1234的退款申请……”，锁定对方身份自认。</p>
+            </div>
+          </label>
+
+          <!-- Item 4 -->
+          <label class="flex items-start space-x-3 p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/70 cursor-pointer transition">
+            <input type="checkbox" onchange="calcEvidence()" class="evidence-chk mt-1 w-4 h-4 rounded text-blue-600 bg-slate-900 border-slate-700 focus:ring-0">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <span class="text-sm font-semibold text-white">被投诉人国家企信网主体工商全称查验 (gsxt.gov.cn)</span>
+                <span class="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">核验必备 ★★★</span>
+              </div>
+              <p class="text-xs text-slate-400">核对对方营业执照上的法定工商全称与统一社会信用代码，严禁填写店铺昵称或拼音简称，否则 12315 与法院微法院将因主体不明确直接退件。</p>
+            </div>
+          </label>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: 📝 规范文书代写 (Document Drafting Workbench) -->
+    <section id="section-draft" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <span>📝 规范文书代写工作台 (Document Drafting Workbench)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">按需生成符合国家法定格式的标准公文，剥离多余情绪，直击法定责任条款。</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <select id="doc-type-select" onchange="switchDocTemplate()" class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+              <option value="12315">全国 12315 平台投诉书模板</option>
+              <option value="tax">12366 税务违法行为检举书</option>
+              <option value="court">人民法院微法院民事起诉状 (小额诉讼)</option>
+              <option value="labor">劳动人事争议仲裁申请书 (违法辞退)</option>
+            </select>
+            <button onclick="copyToClipboard('doc-preview-content')" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-xs font-bold text-white transition">
+              一键复制公文
+            </button>
+          </div>
+        </div>
+
+        <!-- Document Preview Canvas -->
+        <div class="bg-slate-950 rounded-xl p-6 border border-slate-800 text-slate-200 mono text-xs sm:text-sm leading-relaxed overflow-x-auto">
+          <pre id="doc-preview-content" class="whitespace-pre-wrap select-all"></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: 🏆 胜利名人堂 (Battle-Tested Hall of Fame) -->
+    <section id="section-hall" class="tab-content hidden space-y-6">
+      <div class="glass-card rounded-2xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+              <span>🏆 真实战报与胜利名人堂 (Hall of Fame)</span>
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">真实的胜利是点燃信心的最好良药。收录真实普通人绝地翻盘的打款复盘。</p>
+          </div>
+          <a href="https://github.com/JimmyWangJimmy/rights-protection-agent/issues/new?template=victory_report.yml" target="_blank" class="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs font-bold text-white shadow-md shadow-emerald-600/20 transition flex items-center space-x-1.5">
+            <span>🎉 提交我的胜利战报</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-slate-700 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">CASE-001 · 数码网购</span>
+              <span class="text-xs text-emerald-400 font-semibold">全额退款 4,299 元</span>
+            </div>
+            <h3 class="font-bold text-white text-sm">全新手机屏幕亮斑，商家以“已联网激活”为由拒退，9天原路全额追回</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong>无赖套路</strong>：客服复读机称拆封不退，要求用户自费开质检单。<br>
+              <strong>破局关键</strong>：区分无理由与法定质量瑕疵；直击《消保法》第23条第3款举证责任倒置；12315向商家属地市监所递交完整一镜到底开箱录像。<br>
+              <strong>破防时刻</strong>：市监所致电商家核实台账后 2 小时，客服主管主动道歉并提供顺丰保价上门取件退款。
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-slate-700 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">CASE-002 · 劳动用工</span>
+              <span class="text-xs text-emerald-400 font-semibold">到账 58,000 元</span>
+            </div>
+            <h3 class="font-bold text-white text-sm">软件公司未签书面合同且口头强行辞退，双倍工资差额与2N赔偿全额到账</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong>无赖套路</strong>：HR口头通知走人并瞬间封停企业钉钉账号踢出群聊。<br>
+              <strong>破局关键</strong>：逆风抢救证据，通过个税APP导出盖有国家税务总局公章的扣缴明细锁定劳动关系；启动社保公积金稽查杠杆与仲裁双轨并进。<br>
+              <strong>破防时刻</strong>：公司老板面对全员公积金被稽查补缴的数百万风险，在仲裁庭前调解中全盘低头签署调解书。
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-slate-700 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">CASE-003 · 租房中介</span>
+              <span class="text-xs text-emerald-400 font-semibold">全额退还押金 4,800 元</span>
+            </div>
+            <h3 class="font-bold text-white text-sm">退租时二房东拿放大镜找瑕疵扣光全额押金，微法院立案短信施压24小时内退款</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong>无赖套路</strong>：称墙皮有轻微手印、地板有正常磨损，扣除3000元保洁费并拉黑微信。<br>
+              <strong>破局关键</strong>：引用《民法典》第710条正常损耗不承担赔偿责任；在微法院提交小额诉讼起诉状；12366举报房东偷逃租赁个税。<br>
+              <strong>破防时刻</strong>：中介法人收到法院诉前调解系统自动发送的案号审查短信，24小时内主动解除拉黑并全额电汇退款。
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 hover:border-slate-700 transition">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">CASE-004 · 预付充值</span>
+              <span class="text-xs text-emerald-400 font-semibold">全额回款 6,500 元</span>
+            </div>
+            <h3 class="font-bold text-white text-sm">连锁健身房更名关门跑路，利用新《公司法》出资加速穿透股东，支付令强制执行</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              <strong>无赖套路</strong>：变更偏远地区空壳老人为法人，卷款失联。<br>
+              <strong>破局关键</strong>：国家企信网查明原股东未足额实缴出资，依据新《公司法》第54条申请出资加速到期；向法院申请民事《支付令》（仅几十元工本费）。<br>
+              <strong>破防时刻</strong>：对方未在15天内提合法异议，支付令生效后法院执行局直接冻结股东个人微信与银行卡。
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 py-6 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 space-y-1">
+      <p>Rights Protection Agent (维权代理人) · Open Source Project under MIT License</p>
+      <p>真实法条零幻觉 · 逆风证据抢救 · 多 LLM 红蓝对抗推演 · 渐进式披露</p>
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.className = 'tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-slate-400 hover:text-white';
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+
+      const activeBtn = document.getElementById('tab-' + tabId);
+      const activeContent = document.getElementById('section-' + tabId);
+      if (activeBtn) activeBtn.className = 'tab-btn px-4 py-1.5 rounded-lg text-sm font-medium transition-all bg-blue-600 text-white shadow-sm';
+      if (activeContent) activeContent.classList.remove('hidden');
+
+      if (tabId === 'draft') switchDocTemplate();
+    }
+
+    function updateIntakeTemplate() {
+      const cat = document.getElementById('case-category').value;
+      loadSampleCase(cat);
+    }
+
+    function loadSampleCase(type) {
+      if (type === 'digital') {
+        document.getElementById('case-category').value = 'digital';
+        document.getElementById('case-opponent').value = '某天猫第三方旗舰店 (工商全称待查)';
+        document.getElementById('case-amount').value = '4299';
+        document.getElementById('case-time').value = '收货后第 2 天';
+        document.getElementById('case-pushback').value = '“已拆封激活联网，影响二次销售，不属于七天无理由退货。请自行去官方售后自费开检测单。”';
+        runDiagnosis();
+      } else if (type === 'labor') {
+        document.getElementById('case-category').value = 'labor';
+        document.getElementById('case-opponent').value = '某互联软件开发有限公司';
+        document.getElementById('case-amount').value = '58000';
+        document.getElementById('case-time').value = '入职 1 年零 2 个月';
+        document.getElementById('case-pushback').value = '“试用期/季度考核不合格，今天必须离职，没有任何离职补偿。不签自愿离职就背景调查通报同行。”';
+        runDiagnosis();
+      } else if (type === 'rent') {
+        document.getElementById('case-category').value = 'rent';
+        document.getElementById('case-opponent').value = '某租房资产管理中介公司';
+        document.getElementById('case-amount').value = '4800';
+        document.getElementById('case-time').value = '租约到期退租当天';
+        document.getElementById('case-pushback').value = '“马桶发黄、木地板有细微划痕，需扣除3000元深度保洁费，剩余押金不退。”';
+        runDiagnosis();
+      }
+    }
+
+    function runDiagnosis() {
+      const cat = document.getElementById('case-category').value;
+      const legal = document.getElementById('out-legal');
+      const leverage = document.getElementById('out-leverage');
+      const action = document.getElementById('out-action');
+      const script = document.getElementById('rebuttal-script');
+      const badge = document.getElementById('badge-statute');
+
+      if (cat === 'digital') {
+        badge.innerText = '胜率评估: 88%';
+        legal.innerHTML = '对方主张“拆封不退”偷换了法律概念！本案属于《消保法》第24条<strong>法定质量瑕疵退货</strong>，绝非第25条“无理由退货”。根据《消保法》第23条第3款，手机属于耐用数码商品，六个月内出现瑕疵，<strong>由经营者承担举证责任</strong>，依法严禁要求消费者自费送检！';
+        leverage.innerHTML = '直接向其企业工商登记地管辖的<strong>区市场监督管理局 (12315)</strong> 提交投诉书。直击《消保法》第26条格式条款无效及侵害消费者合法权益，迫使其售后总监为了防止被市监所现场抽检进货台账而主动求和解。';
+        action.innerHTML = '第一步：在微信账单中点击该笔支付，选择【申请电子凭证】导出带有财付通鲜红公章的官方 PDF（耗时 2 分钟）；<br>第二步：复制下方话术发送给客服，等待其升级响应。';
+        script.innerText = '“请明确：本次主张基于《消保法》第二十四条质量瑕疵法定退货，非七日无理由退货。根据《消保法》第二十三条第三款，手机属于耐用品，六个月内发生争议由贵司承担无瑕疵举证责任。贵司要求消费者自费鉴定的格式条款自始无效。如今日18:00前未开通退款通道，我方将向属地市场监督管理所（12315）提交完整开箱证据并申请现场台账核查。”';
+      } else if (cat === 'labor') {
+        badge.innerText = '胜率评估: 92%';
+        legal.innerHTML = '用人单位单方解除劳动合同必须具备法定事由。依据《劳动合同法》第40条，即便考核不胜任，也必须经过“培训或者调整工作岗位”程序；未履行前置程序直接解雇，构成《劳动合同法》第87条<strong>违法解除劳动合同，应当支付双倍经济补偿金 (2N)</strong>。未签劳动合同还应支持第82条第2至12个月双倍工资差额！';
+        leverage.innerHTML = '双轨杠杆：①向劳动争议仲裁委员会申请仲裁；②向公积金管理中心与税务稽查部门提起企业未全员足额缴纳公积金行政核查。企业面临数十万元补缴风险，老板必在庭前调解妥协。';
+        action.innerHTML = '第一步：坚决不要在“自愿离职单”上签字！立即打开【个人所得税 APP】导出该公司连续扣缴申报记录（带公章PDF）；<br>第二步：保留录音并向其法定代表人邮寄《促请依法履行劳动合同通知书》。';
+        script.innerText = '“我拒绝在任何非事实离职文件上签字。贵司未安排转岗或法定培训单方解除合同，已违反《劳动合同法》第四十条与第八十七条。我已固定个税纳税扣缴单与工作往来凭证。如无法依法支付违法解除赔偿金，我将于明日正式向劳动仲裁委员会申请立案，并就公积金及个税缴纳合规性向主管部门提交线索。”';
+      } else if (cat === 'rent') {
+        badge.innerText = '胜率评估: 85%';
+        legal.innerHTML = '依据《民法典》第七百一十条：“承租人按照约定的方法或者根据租赁物的性质使用租赁物，致使租赁物受到损耗的，<strong>不承担赔偿责任</strong>。”正常日常居住的折旧磨损依法由出租人承担，中介无权单方罚款克扣押金。';
+        leverage.innerHTML = '小额诉讼闪电战：在人民法院微法院提起小额诉讼（诉讼费减半仅数十元，胜诉由被告承担），法院立案庭下发调解通知短信；同步向 12366 检举其微信私账收租偷逃房屋租赁税。';
+        action.innerHTML = '第一步：调出当初入住时的交接视频与房屋原始照片；<br>第二步：复制下方话术明确告知已准备提交微法院小额诉讼，倒计时24小时。';
+        script.innerText = '“根据《民法典》第七百一十条，正常生活居住磨损依法不承担赔偿责任。贵司克扣押金无事实与法律依据。我已整理房屋交接视频与租金转账底单，若今日未能原路退还 4,800 元押金，我将于明日通过‘人民法院在线服务’微法院正式提起小额诉讼，并就贵司微信收取租金未开具发票向12366税务稽查部门实名递交检举材料。”';
+      }
+    }
+
+    function simulateDebate(type) {
+      if (type === 'digital') {
+        document.getElementById('debate-blue-title').innerText = '主张法定质量瑕疵退货与举证倒置';
+        document.getElementById('debate-blue-content').innerHTML = '• 依据《消保法》第24条法定退货，击碎对方“拆封不退”借口；<br>• 依据《消保法》第23条第3款，主张六个月内举证责任倒置；<br>• 保留向12315申请现场台账调取的非对称行政杠杆。';
+        document.getElementById('debate-red-title').innerText = '挑刺开箱连续性与管辖权协议';
+        document.getElementById('debate-red-content').innerHTML = '• “买方微距拍照无法排除离开快递员后的次生损坏”；<br>• “用户协议已约定仲裁管辖，法院无管辖权”；<br>• “索赔若超出退款，涉嫌敲诈勒索，法务将向经侦报案”。';
+        document.getElementById('debate-judge-title').innerText = '法庭采信胜率：约 75%';
+        document.getElementById('debate-judge-content').innerHTML = '• <strong>蓝方死穴</strong>：退货寄件必须在顺丰快递员验视下完成全流程一镜到底，防商家拒收掉包；<br>• <strong>红方弱点</strong>：格式条款免责无效，商家自证合格成本极高；<br>• <strong>和解建议</strong>：全额退款 + 商家承担运费保价即应收官。';
+      } else if (type === 'labor') {
+        document.getElementById('debate-blue-title').innerText = '主张违法解除2N赔偿金与双倍工资';
+        document.getElementById('debate-blue-content').innerHTML = '• 依据《劳动合同法》第87条主张违法解除；<br>• 调取个税扣缴APP记录锁定劳动关系；<br>• 辅以公积金未全额缴纳合规稽查杠杆。';
+        document.getElementById('debate-red-title').innerText = '主张员工旷工与绩效严重不合格';
+        document.getElementById('debate-red-content').innerHTML = '• “员工考勤记录有瑕疵，构成严重违纪”；<br>• “员工拒绝接受岗位调整属于旷工”；<br>• “公司将对后续背景调查如实出具负面评价”。';
+        document.getElementById('debate-judge-title').innerText = '仲裁采信胜率：约 85%';
+        document.getElementById('debate-judge-content').innerHTML = '• <strong>蓝方死穴</strong>：绝不可签署任何包含“个人原因离职”的文件；<br>• <strong>红方弱点</strong>：解除通知书程序违法，无工会告知及转岗记录；<br>• <strong>和解建议</strong>：庭前调解接受 N+1 或 N+0.8 现金到账，并要求出具标准离职证明。';
+      }
+    }
+
+    function calcEvidence() {
+      const chks = document.querySelectorAll('.evidence-chk');
+      let checked = 0;
+      chks.forEach(c => { if(c.checked) checked++; });
+      const pct = Math.round((checked / chks.length) * 100);
+      const scoreEl = document.getElementById('evidence-score');
+      scoreEl.innerText = pct + '%';
+      if(pct >= 80) scoreEl.className = 'text-2xl font-extrabold text-emerald-400';
+      else if(pct >= 50) scoreEl.className = 'text-2xl font-extrabold text-blue-400';
+      else scoreEl.className = 'text-2xl font-extrabold text-amber-400';
+    }
+
+    function switchDocTemplate() {
+      const type = document.getElementById('doc-type-select').value;
+      const preview = document.getElementById('doc-preview-content');
+      if (type === '12315') {
+        preview.innerText = `【全国 12315 平台投诉书】
+
+一、投诉人与被投诉人信息
+投诉人：[您的姓名] | 联系电话：[您的手机号] | 身份证号：[您的身份证号]
+被投诉人企业全称：[在国家企业信用信息公示系统查询的工商全称]
+统一社会信用代码：[91XXXXXXXXXXXXXXXX]
+法定代表人：[某某] | 注册地址：[XX省XX市XX区XX路XX号]
+
+二、投诉请求
+1. 责令被投诉人立即依法履行法定退货退款义务，退还实付货款共计 4,299.00 元；
+2. 责令被投诉人承担商品退回的双向顺丰快递保价费用；
+3. 依法纠正被投诉人设置“拆封联网概不退换”之无效格式条款的违法行为。
+
+三、事实与理由
+投诉人于 2026年XX月XX日在被投诉人开设的旗舰店购买手机一部（订单号：XXXXXXXXX，实付 4299 元）。收货开箱通电后，即发现屏幕存在明显亮斑故障。
+投诉人立即联系被投诉人售后，对方以“商品已拆封联网激活，不属于七天无理由退货”为由推诿拒退，并强令投诉人自费前往第三方检测机构开具证明。
+投诉人认为：
+1. 依据《消费者权益保护法》第二十四条，经营者提供的商品不符合质量要求的，消费者有权要求退货；
+2. 依据《消费者权益保护法》第二十三条第三款，该手机属于耐用数码商品，六个月内发生瑕疵，依法由经营者承担无瑕疵举证责任。被投诉人拒绝举证并推诿消费者，严重侵害消费者合法权益。
+特此向贵局提出投诉，请依法予以调解并支持投诉人合法请求！
+
+附件证据清单：
+1. 微信支付官方电子凭单（盖财付通公章）；
+2. 完整未剪辑开箱验视与故障视频；
+3. 被投诉人客服拒绝履行法定退货义务之完整沟通记录。`;
+      } else if (type === 'tax') {
+        preview.innerText = `【国家税务总局 12366 税收违法行为检举书】
+
+检举人：[您的姓名] | 联系电话：[您的电话] (已申请依法保密)
+被检举人名称：[涉事公司企业工商全称]
+纳税人识别号/统一社会信用代码：[91XXXXXXXXXXXXXXXX]
+实际经营地址：[XX市XX区XX路XX大厦XX室]
+
+检举事项：涉嫌隐匿应税收入、少列收入偷逃税款及拒不开具正规发票
+
+事实与证据：
+检举人于 2026年XX月XX日与被检举人发生交易/租赁业务，涉及金额共计 [XXXX] 元。
+被检举人要求检举人通过个人微信/个人支付宝转账（收款人账户：XXX），且在检举人明确索取发票时，以“特价不含税/个人账户无法开票”为由蓄意拒不开具增值税发票。
+依据《中华人民共和国发票管理办法》第三十五条及《中华人民共和国税收征收管理法》第六十三条，被检举人行为涉嫌偷逃税款。特提请贵局稽查部门立案稽查并追缴税款及滞纳金。
+
+附件证据：
+1. 微信/支付宝官方加盖公章之转账流水记录；
+2. 索要发票遭拒之聊天记录与录音。`;
+      } else if (type === 'court') {
+        preview.innerText = `【民事起诉状 (微法院小额诉讼范本)】
+
+原告：[您的姓名]，男/女，汉族，住址：[身份证住址]，身份证号：[XXXXXXXXXXXXXXX]，电话：[XXXXXXXXXXX]
+被告：[对方公司工商全称]，住所地：[企业注册地址]，法定代表人：[姓名]，统一社会信用代码：[91XXXXXXXXXXXXXXXX]
+
+诉讼请求：
+1. 判令被告立即退还原告押金/货款共计人民币 [4,800.00] 元；
+2. 判令被告承担原告支付的垫付运费/利息共计人民币 [150.00] 元；
+3. 本案全部诉讼费用（小额诉讼费减半为25元）由被告全额承担。
+
+事实与理由：
+[简明叙述事件起因、履行合同、发生违约推诿之事实经过]
+依据《中华人民共和国民法典》第五百七十七条、第七百一十条及《中华人民共和国民事诉讼法》第一百六十五条关于小额诉讼一审终审之规定，特诉请人民法院依法判如所请！
+
+此致
+[被告住所地或合同履行地基层] 人民法院
+具状人：[您的姓名] (手写签名)
+2026年XX月XX日`;
+      } else if (type === 'labor') {
+        preview.innerText = `【劳动人事争议仲裁申请书】
+
+申请人：[您的姓名]，身份证号：[XXXXXXXXXXXXXXX]，联系电话：[XXXXXXXXXXX]
+被申请人：[用人单位工商全称]，住所地：[公司注册地址]，法定代表人：[姓名]
+
+仲裁请求：
+1. 裁决被申请人支付申请人违法解除劳动合同赔偿金人民币 [60,000.00] 元；
+2. 裁决被申请人支付申请人未签订书面劳动合同第二倍工资差额人民币 [45,000.00] 元；
+3. 裁决被申请人依法为申请人补办离职证明及社保转出手续。
+
+事实与理由：
+申请人于202X年XX月XX日入职被申请人处，担任XX岗位，月均实发工资为人民币 [15,000] 元。
+在职期间被申请人始终未与申请人订立书面纸质劳动合同。2026年XX月XX日，被申请人单方下达解雇通知，未依法安排转岗或培训，严重违反《劳动合同法》第四十条与第八十七条。
+特向贵委申请劳动仲裁！
+
+此致
+[用人单位所在地或劳动合同履行地] 劳动人事争议仲裁委员会
+申请人：[您的签名]
+2026年XX月XX日`;
+      }
+    }
+
+    function copyToClipboard(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ 已成功复制到剪贴板！');
+      }).catch(() => {
+        alert('请手动选中文本进行复制。');
+      });
+    }
+
+    // Initialize default diagnosis & template
+    runDiagnosis();
+    switchDocTemplate();
+  </script>
+</body>
+</html>

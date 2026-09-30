@@ -1,20 +1,34 @@
 <div align="center">
 
-# ⚖️ 维权代理人 (Rights Protection Agent)
+<img src="./assets/banner.svg" alt="Rights Protection Agent Banner" width="100%" />
 
-**让每一个普通人，都能拥有站在“上帝视角”的数字维权参谋长**
+<br/><br/>
 
 [![GitHub Stars](https://img.shields.io/github/stars/JimmyWangJimmy/rights-protection-agent?style=for-the-badge&logo=github&color=gold)](https://github.com/JimmyWangJimmy/rights-protection-agent/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.badge?style=for-the-badge)](./LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-brightgreen.badge?style=for-the-badge)](./CONTRIBUTING.md)
-[![Agentic Skill](https://img.shields.io/badge/Architecture-Agentic%20Skill-orange.badge?style=for-the-badge)](#-架构与特性)
-[![Community](https://img.shields.io/badge/Discussions-Open-purple.badge?style=for-the-badge)](https://github.com/JimmyWangJimmy/rights-protection-agent/discussions)
+[![Web Workbench](https://img.shields.io/badge/Web%20UI-Interactive%20Workbench-06B6D4?style=for-the-badge)](#-交互式沙盘工作台-interactive-web-ui)
+[![Discussions](https://img.shields.io/badge/Discussions-Open-purple.badge?style=for-the-badge)](https://github.com/JimmyWangJimmy/rights-protection-agent/discussions)
 
-[English](./README_EN.md) | 简体中文 | [快速上手](#-一行命令极速安装) | [全网宣发文案](./docs/launch-post.md) | [贡献指南](./CONTRIBUTING.md)
+**[English](./README_EN.md)** | **简体中文** | **[🎮 网页交互沙盘](#-交互式沙盘工作台-interactive-web-ui)** | **[🚀 极速安装](#-一行命令极速安装-zero-friction)** | **[🏆 战报名人堂](#-维权胜利名人堂与真实战报-hall-of-fame)** | **[📢 宣发通稿](./docs/launch-post.md)**
 
 </div>
 
 ---
+
+## 🎮 交互式沙盘工作台 (Interactive Web UI)
+
+不想只看枯燥的 Markdown？项目内置了开箱即用的**现代化交互沙盘工作台 (`index.html`)**：
+
+<div align="center">
+  <kbd>双击打开根目录下的 <b>index.html</b> 即可在任意浏览器本地直接运行（无需安装后端）</kbd>
+</div>
+
+- 🎯 **案情速诊与上帝视角研判**：选择纠纷场景，自动测算胜率、法条死穴、施加的非对称杠杆与反制台词；
+- 🎭 **多 LLM 红蓝对抗推演演练室**：现场模拟刺头法务反扑，直面证据死穴，输出最佳止损和解线；
+- 🛡️ **司法级证据防御力自检清单**：交互式打钩排查（含微信官方盖章明细导出、逆风录音合规），动态计算采信指数；
+- 📝 **规范公文代写工作台**：12315 投诉信、税务检举信、起诉状、劳动仲裁一键实时生成与复制；
+- 🏆 **胜利名人堂卡片画廊**：一览真实反杀战报与破局复盘。
 
 ## 📖 写在前面：一次真实的“拆封不退”与开源初心
 
