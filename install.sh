@@ -12,9 +12,10 @@ mkdir -p "$TARGET_DIR/references"
 BASE_URL="https://raw.githubusercontent.com/JimmyWangJimmy/rights-protection-agent/main"
 
 FILES=(
-    "SKILL.md"
+    "SKILL.md",
     "references/cases.md"
     "references/channels.md"
+    "references/cross-border.md"
     "references/document-templates.md"
     "references/evidence.md"
     "references/excuses.md"

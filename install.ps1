@@ -15,6 +15,7 @@ $files = @(
     "SKILL.md",
     "references/cases.md",
     "references/channels.md",
+    "references/cross-border.md",
     "references/document-templates.md",
     "references/evidence.md",
     "references/excuses.md",

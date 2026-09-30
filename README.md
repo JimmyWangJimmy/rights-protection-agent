@@ -60,13 +60,26 @@
 
 ### 方式二：一键安装到 Claude Code 环境
 ```bash
-# Linux / macOS
+# Linux / macOS 一键安装
 curl -sSL https://raw.githubusercontent.com/JimmyWangJimmy/rights-protection-agent/main/install.sh | bash
 
-# Windows PowerShell (管理员或普通用户均可)
+# Windows PowerShell 一键安装
 irm https://raw.githubusercontent.com/JimmyWangJimmy/rights-protection-agent/main/install.ps1 | iex
 ```
 *(手动安装：直接将项目下 `.agents/skills/rights-protection-agent` 文件夹完整复制到你的 `~/.claude/skills/` 目录)*
+
+### 方式三：⚡ 零安装直接玩（适用于网页版 ChatGPT / Claude / DeepSeek / Kimi）
+如果你没有本地开发环境，只想在网页端对话中使用：  
+👉 直接点击打开并复制 [**`SKILL.md` 全文**](file:///.agents/skills/rights-protection-agent/SKILL.md)，粘贴到任意大模型的系统提示词或第一句对话中，立刻唤醒该维权参谋大脑！
+
+---
+
+## 🌐 跨国平台与数字商品维权专栏 (Cross-Border Playbook)
+
+面对跨国大厂（Steam、苹果 Apple、亚马逊海淘、境外 SaaS），针对“国内无实体、外服条款踢皮球”的痛点，我们在 [`references/cross-border.md`](./.agents/skills/rights-protection-agent/references/cross-border.md) 中提供了专门的击穿方案：
+- 💳 **国际信用卡“强制拒付” (VISA/MasterCard Chargeback)**：针对海外未履约或货不对板，利用卡组织全球规则强制划扣资金并处商家 15~30 美元罚金；
+- 🎮 **Steam / Valve 游戏争议**：超 2 小时严重 bug 特批退款话术工单、华盛顿州总检察长办公室消费者保护处长臂管辖投诉；
+- 🍏 **Apple App Store 恶意扣费**：系统初审被拒后，强制转接国内“高级技术顾问（Senior Advisor）”人工争议复核实战话术。
 
 ---
 

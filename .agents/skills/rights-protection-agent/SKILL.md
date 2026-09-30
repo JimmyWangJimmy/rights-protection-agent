@@ -96,4 +96,5 @@ flowchart TD
 - [多维策略与合规防线 (`references/strategies.md`)](./references/strategies.md)：全景主体软肋地图、标的额阶梯精算、合法行使监督权 vs 敲诈勒索防线、危机定心丸拆弹指南。
 - [套路破解与交涉话术 (`references/excuses.md`)](./references/excuses.md)：高频推诿说辞击穿表、拖延战术识别、实战对话脚本。
 - [标准化文书范本 (`references/document-templates.md`)](./references/document-templates.md)：投诉信、检举信、催告函、劳动仲裁申请、复议申请及起诉状规范范本。
+- [跨国组织与数字平台维权 (`references/cross-border.md`)](./references/cross-border.md)：国际信用卡拒付 (VISA/MasterCard Chargeback)、Steam 游戏异常退款、Apple App Store 人工争议复核实战。
 
