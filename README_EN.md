@@ -98,12 +98,44 @@ Includes dedicated playbooks for international disputes in [`references/cross-bo
 
 ---
 
-## 🏆 Hall of Fame
+---
 
-Every merged pull request contributing real-world successful case studies, newly discovered pushback tactics, or verified regulatory channels will be permanently featured here:
+## 🎭 Multi-LLM Adversarial Debate Engine
+
+Ordinary consumers often suffer from confirmation bias—assuming their moral high ground guarantees victory, only to freeze when corporate counsel strikes back with procedural objections.  
+Our [`references/debate.md`](./.agents/skills/rights-protection-agent/references/debate.md) provides an **Adversarial Red-Blue Debate Simulation**:
+
+- **One-Click Activation**: Type `@辩论` (`@debate`) or trigger during critical impasse moments to run a 3-act simulation: *Claimant Advocate (Blue) vs. Corporate Counsel (Red) vs. Neutral Arbiter/Judge (Bench)*;
+- **Cross-LLM Red Teaming**: Copy dedicated system prompts across models (e.g., Claude 3.5 Sonnet vs. GPT-4o) to simulate intense corporate legal pushback;
+- **Judicial Probability & Settlement Range**: Accurately calculates judicial winning odds, highlights evidence vulnerabilities, and defines realistic settlement thresholds.
+
+---
+
+## 🧭 Progressive Disclosure Architecture
+
+To prevent overwhelming distressed users with legal jargon and formal lawsuits upfront, the skill enforces **Two-Tier Progressive Disclosure**:
+
+1. **System-Level Lazy Loading**: Reference documents are strictly loaded on-demand per state machine stage (Intake/Evidence -> Pushback/Leverage -> On-demand Drafting -> Closing/Settlement), preventing context window bloat and instruction degradation.
+2. **User-Level Progressive Pacing**:
+   - **Focus on Next 1 Step**: Delivers only 1 clear, 2-minute immediate action at a time (e.g., exporting official stamped bank/WeChat receipts);
+   - **Anticipate Counter-Moves**: Pre-warns the user about the merchant's expected pushback scripts and arms them with exact rebuttal lines;
+   - **Folded Legal Arsenal**: Keeps formal court filings folded until negotiation breaks down.
+
+---
+
+## 🏆 Battle-Tested Case Hall of Fame
+
+Real victories dispel learned helplessness. Our [`references/cases.md`](./.agents/skills/rights-protection-agent/references/cases.md) documents real turn-around stories:
+- 📱 **Opened Hardware Return**: Overturning "activated/unsealed = no return" rules under statutory defect burden-of-proof inversion;
+- 💻 **Unlawful Dismissal Without Contract**: Reconstructing lost attendance evidence after instant chat deactivation, winning full compensation via tax/social audit pressure;
+- 🏠 **Rental Deposit Retention**: Forcing immediate refund of withheld security deposits through small-claims filing notices;
+- 🏋️ **Gym Pre-paid Card Bailout**: Piercing corporate veils under new Company Law through Court Payment Orders directly freezing shareholder assets;
+- 🎮 **Cross-Border Steam & SaaS Chargebacks**: Recovering funds through VISA/MasterCard card scheme disputes and State AG complaints.
+
+👉 **[Submit Your Victory Report via GitHub Issues](https://github.com/JimmyWangJimmy/rights-protection-agent/issues/new?template=victory_report.yml)** to inspire thousands of ordinary citizens!
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://github.com/JimmyWangJimmy.png" width="80px;"/><br /><sub><b>JimmyWangJimmy</b></sub>](https://github.com/JimmyWangJimmy)<br />💻 Architecture & Strategy | [Join the Hall of Fame!<br />Submit your case study](./CONTRIBUTING.md) |
+| [<img src="https://github.com/JimmyWangJimmy.png" width="80px;"/><br /><sub><b>JimmyWangJimmy</b></sub>](https://github.com/JimmyWangJimmy)<br />💻 Architecture & Strategy | [Submit Victory Report<br />Enter Hall of Fame](https://github.com/JimmyWangJimmy/rights-protection-agent/issues/new?template=victory_report.yml) |
 | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

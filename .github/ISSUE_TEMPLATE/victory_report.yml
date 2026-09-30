@@ -1,0 +1,91 @@
+name: "🏆 维权胜利战报投稿 (Victory Report Submission)"
+description: "记录你的维权胜利过程，为更多身处绝境的普通人点亮灯塔，收录进维权名人堂 (Hall of Fame)。"
+title: "【战报】[场景类型] 遭遇[简短描述]，最终[战果]"
+labels: ["hall-of-fame", "victory-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 🎉 恭喜你取得维权胜利！
+        每一场普通人的胜利，都是对市场不良风气的一次修正。你的经历将成为后来者最重要的“定海神针”。
+        请按照以下结构填写你的真实维权复盘（请注意脱敏个人真实姓名、身份证号等敏感隐私）。
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 1. 纠纷大类 (Dispute Category)
+      description: 请选择最贴近的维权领域
+      options:
+        - 消费维权 (网购退货/霸王条款/虚假宣传/退一赔三)
+        - 劳动人事 (未签合同/违法辞退/克扣工资/加班费)
+        - 房屋租赁 (二房东中介扣押金/甲醛房/违约退租)
+        - 预付充值 (健身房跑路/教培闭店/美容卡退费)
+        - 跨国数字 (Steam/App Store/SaaS订阅/信用卡拒付)
+        - 行政监督 (政府不作为/信息公开延期/行政复议)
+        - 其他民事维权
+    validations:
+      required: true
+
+  - type: input
+    id: amount
+    attributes:
+      label: 2. 涉案金额与最终挽回金额
+      description: 例如：原涉及金额 3,299 元，最终全额退还 3,299 元 + 赔偿 500 元
+      placeholder: "涉案 X 元，最终追回 Y 元"
+    validations:
+      required: true
+
+  - type: textarea
+    id: opponent_tactics
+    attributes:
+      label: 3. 对手初期的推诿无赖套路
+      description: 对方客服/HR/房东一开始是如何推脱的？说了哪些看似无法反驳的话？
+      placeholder: "例如：商家以‘已激活联网不享受无理由退换’拒绝，要求我自费去售后网点开检测单；HR声称试用期不符合录用条件直接封停账号……"
+    validations:
+      required: true
+
+  - type: textarea
+    id: key_leverage
+    attributes:
+      label: 4. 关键破局杠杆与核心证据 (Turning Point & Strategy)
+      description: 哪一个法条、哪一项证据或哪一个官方渠道起到了决定性作用？
+      placeholder: "例如：拿出了《消保法》第23条举证倒置条款 + 在 12315 平台上传了一镜到底开箱视频，要求市监所向商家调取进货台账；使用了微法院小额诉讼立案审查短信……"
+    validations:
+      required: true
+
+  - type: textarea
+    id: breaking_point
+    attributes:
+      label: 5. 对方心态崩溃与主动妥协的转折点
+      description: 对方是在什么时刻态度发生 180 度大转弯主动求和解的？
+      placeholder: "例如：市监所电话打给商家法人核实后不到 2 小时，客服主管主动打来电话道歉；劳动仲裁案前调解时，公司看到补缴社保公积金稽查函立刻认怂……"
+    validations:
+      required: true
+
+  - type: input
+    id: duration
+    attributes:
+      label: 6. 维权总耗时与实际花费
+      description: 例如：历时 8 天，实际投入整理材料时间 20 分钟，花费 0 元
+      placeholder: "历时 X 天，投入材料时间 Y 分钟，花费 Z 元"
+    validations:
+      required: true
+
+  - type: textarea
+    id: advice
+    attributes:
+      label: 7. 给其他维权者的真诚建议
+      description: 如果有人现在遭遇和你一模一样的事，你最想提醒他注意什么细节？
+      placeholder: "例如：千万不要在自愿离职单上签字！录音前一定要明确对方的工号和姓名！微信转账一定要去导出带公章的电子凭单！"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 8. 授权确认
+      options:
+        - label: 我已对本战报中的姓名、身份证、电话等隐私信息进行了脱敏处理。
+          required: true
+        - label: 我同意将本战报复盘收录至 `rights-protection-agent` 战报名人堂 (Hall of Fame)，供更多普通人参考。
+          required: true

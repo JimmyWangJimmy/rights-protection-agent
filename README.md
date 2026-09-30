@@ -118,13 +118,54 @@ flowchart TD
 
 ---
 
-## 🏆 民间维权英雄榜 (Hall of Fame)
+---
 
-本项目的发展离不开每一位勇敢捍卫合法权益的普通人。  
-所有通过提交 PR 贡献真实维权案例、破解套路、完善渠道的小伙伴，都将永久记录于此：
+## 🎭 多 LLM 红蓝对抗推演引擎 (Multi-LLM Debate Engine)
+
+普通人维权最怕“一厢情愿的逻辑自洽”——自己觉得占理，却在面对老练法务或狡猾商家的一句反问时哑口无言。  
+我们在 [`references/debate.md`](./.agents/skills/rights-protection-agent/references/debate.md) 中首创了**红蓝实战对抗推演协议**：
+
+```mermaid
+flowchart LR
+    Blue["🟦 蓝方：维权参谋长<br/>(法理支撑 + 非对称杠杆)"] <-->|"攻防模拟"| Red["🟥 红方：老油条法务<br/>(挑刺证据漏洞 + 心理施压)"]
+    Blue --> Judge["⚖️ 中立审判席：基层法官 / 市监调解员<br/>(胜率测算 + 指明死穴 + 和解止损点)"]
+    Red --> Judge
+```
+
+- **一键激活**：只需在对话中输入 `@辩论` 或在面临重大抉择时，Agent 自动分幕演绎“蓝方主张 -> 红方法务刁难 -> 法官实务心证”；
+- **跨模型对轰**：支持将内置 System Prompt 分别喂给两个不同大模型（如 Claude vs GPT-4o），让顶级 LLM 模拟最严苛的法务攻防；
+- **法官裁量心证**：客观测算诉讼胜率，提前指出证据链第一大死穴，给出最佳性价比的和解底线。
+
+---
+
+## 🧭 渐进式披露与状态机架构 (Progressive Disclosure)
+
+普通人在焦虑恐惧时，最怕 AI 一下子甩出上千字法条和一堆起诉书。本项目严格推行**双层渐进式披露原则**：
+
+1. **系统级惰性路由（Token-Efficient Lazy Loading）**：
+   - 绝不一次性向大模型喂入全部参考文件；
+   - 严格按状态机阶段（定性取证 -> 施压交涉 -> 按需代写 -> 和解交割）定向调阅 Reference，杜绝注意力稀释与上下文膨胀；
+2. **用户级极简交互（Focus on Next 1 Step）**：
+   - **当下唯一动作**：每次只让用户做一件耗时 2~3 分钟的具体操作（如：导出微信带章账单）；
+   - **预判对方反应**：提前预告对方的推诿套路，给出备用反驳台词；
+   - **折叠文书弹药**：复杂起诉状与投诉信仅在私力协商破裂、必须向外部机构递交时按需生成。
+
+---
+
+## 🏆 维权胜利名人堂与真实战报 (Hall of Fame)
+
+真实的胜利，是消除普通人“习得性无助”的最好良药。我们在 [`references/cases.md`](./.agents/skills/rights-protection-agent/references/cases.md) 中完整收录了普通人以弱胜强的实战战报：
+
+- 📱 **数码拆封拒退反杀案**：4,299 元手机因已激活遭拒，利用《消保法》第23条举证倒置 + 12315 市监督办，9天原路全额退款；
+- 💻 **互联网公司无合同辞退案**：程序员被秒踢钉钉群，利用个税纳税单逆风取证 + 社保公积金稽查杠杆，仲裁前调解全额拿到 58,000 元补偿金；
+- 🏠 **中介克扣租房全额押金案**：二房东拿放大镜扣 4,800 元押金，利用微法院小额诉讼立案审查短信 + 税务倒查，24小时内光速退款；
+- 🏋️ **健身房预付费跑路案**：利用新《公司法》第54条穿透原股东实缴出资，申请《民事诉讼法》支付令直接冻结股东个人账户；
+- 🎮 **跨境 Steam 封号 / 海外 SaaS 扣款**：利用 VISA/MasterCard 国际拒付 (Chargeback) + 华盛顿州检察长 AG 投诉，美金全额退汇。
+
+👉 **[点击提交你的真实维权战报 (Submit Victory Report)](https://github.com/JimmyWangJimmy/rights-protection-agent/issues/new?template=victory_report.yml)**：让你的经历成为千千万万维权者的定海神针！
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://github.com/JimmyWangJimmy.png" width="80px;"/><br /><sub><b>JimmyWangJimmy</b></sub>](https://github.com/JimmyWangJimmy)<br />💻 架构 / 📜 策略 | [欢迎加入英雄榜！<br />提交你的破防案例](./CONTRIBUTING.md) |
+| [<img src="https://github.com/JimmyWangJimmy.png" width="80px;"/><br /><sub><b>JimmyWangJimmy</b></sub>](https://github.com/JimmyWangJimmy)<br />💻 架构 / 📜 策略 | [欢迎提交战报！<br />进入维权名人堂](https://github.com/JimmyWangJimmy/rights-protection-agent/issues/new?template=victory_report.yml) |
 | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
